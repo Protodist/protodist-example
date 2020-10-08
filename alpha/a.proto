@@ -1,0 +1,9 @@
+syntax = "proto3";
+package alpha;
+
+import "validate/validate.proto";
+
+message AlphaTest {
+    uint64 id    = 1 [(validate.rules).uint64.gt    = 999];
+    string email = 2 [(validate.rules).string.email = true];
+}

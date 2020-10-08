@@ -1,0 +1,43 @@
+name: example
+git:
+  host: github.com
+  organization: protodist
+  user: 4nte
+distribution:
+  - name: proto-all
+    protoPackages: [alpha,beta,gamma]
+    distributionPackages:
+      - target: go
+        packageOption: github.com/protodist/proto-all-go/{{.ProtoPackage}} # TODO: caveat, package name needs to be suffixed with "-go"
+        plugins:
+          - name: protoc-gen-validate
+            args:
+              validate_out: "lang=go:{{.OutDir}}"
+      - target: js
+  - name: proto-alpha
+    protoPackages: [alpha]
+    distributionPackages:
+      - target: go
+        plugins:
+          - name: protoc-gen-validate
+            args:
+              validate_out: "lang=go:{{.OutDir}}"
+        packageOption: github.com/protodist/proto-alpha-go/{{.ProtoPackage}}
+      - target: js
+  - name: proto-gamma
+    protoPackages: [gamma]
+    distributionPackages:
+      - target: go
+        plugins:
+          - name: protoc-gen-validate
+            args:
+              validate_out: "lang=go:{{.OutDir}}"
+        packageOption: github.com/protodist/proto-gamma-go/{{.ProtoPackage}}
+      - target: js
+  - name: proto-b
+    protoPackages: [beta]
+    distributionPackages:
+#      - target: java
+#        packageOption: example.protodist.{{.ProtoPackage}}
+      - target: js
+
