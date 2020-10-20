@@ -1,0 +1,24 @@
+
+name: Run protodist on branch push
+
+on:
+  push:
+    branches:
+
+jobs:
+  test:
+    name: Compile protobufs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Inject slug/short variables
+        uses: FranzDiebold/github-env-vars-action@v1.2.1
+      - name: Protodist
+        uses: 4nte/protodist-action@cea0fd12fe1f0555406133a85d04c063df07ee5b
+        with:
+          git_user: 4nte
+          git_branch: test
+          git_tag: test
+          git_access_token: ${{ secrets.gtoken }}
+          proto_import_path: .
