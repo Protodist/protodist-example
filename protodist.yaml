@@ -37,7 +37,7 @@ distribution:
   - name: proto-b
     protoPackages: [beta]
     distributionPackages:
-#      - target: java
-#        packageOption: example.protodist.{{.ProtoPackage}}
+      - target: java
+        packageOption: example.protodist.{{.ProtoPackage}}
       - target: js
 
